@@ -10,13 +10,13 @@ import androidx.lifecycle.ViewModel;
 import com.example.moviles2020_2.model.Contrato;
 import com.example.moviles2020_2.model.Inquilino;
 import com.example.moviles2020_2.model.Pago;
-import com.example.moviles2020_2.model.Propiedad;
+import com.example.moviles2020_2.model.Inmueble;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentViewModel extends ViewModel {
-    private MutableLiveData<List<Propiedad>> propiedades;
+    private MutableLiveData<List<Inmueble>> propiedades;
     private MutableLiveData<List<Pago>> pagos;
     private MutableLiveData<Inquilino> inquilino;
 
@@ -32,7 +32,7 @@ public LiveData<List<Pago>> getPagos(){
         return pagos;
 }
 
-    public LiveData<List<Propiedad>> getPropiedades(){
+    public LiveData<List<Inmueble>> getPropiedades(){
         if(propiedades==null){
             propiedades=new MutableLiveData<>();
         }
@@ -42,7 +42,7 @@ public LiveData<List<Pago>> getPagos(){
         this.pagos.setValue(pagos);
     }
 
-    public void setPropiedades(List<Propiedad> propiedades) {
+    public void setPropiedades(List<Inmueble> propiedades) {
         this.propiedades.setValue(propiedades);
     }
 
@@ -58,16 +58,16 @@ public LiveData<List<Pago>> getPagos(){
     }
 
     public void obtenerPropiedades(){
-        List<Propiedad> lista = new ArrayList<Propiedad>();
-        lista.add(new Propiedad(1, "Sucre 2250", 4, "Depto", "Residencial", 10000, true));
-        lista.add(new Propiedad(2, "Poblet 548", 10, "Depto", "Comercial", 50000, true));
-        lista.add(new Propiedad(3, "Bolivar 815", 1, "Depto", "Comercial", 5000, true));
-        lista.add(new Propiedad(4, "Colon 3213", 3, "Depto", "Residencial", 15000, true));
-        lista.add(new Propiedad(5, "Lince 22 19", 6, "Depto", "Comercial", 30000, true));
-        lista.add(new Propiedad(6, "Italia 11 Sur", 2, "Depto", "Comercial", 10000, true));
-        lista.add(new Propiedad(7, "Ruta 3 Km 11", 8, "Depto", "Residencial", 80000, true));
-        lista.add(new Propiedad(8, "Ruta 20 km 4", 3, "Depto", "Residencial", 15000, true));
-        lista.add(new Propiedad(9, "Av Illia 185", 4, "Depto", "Comercial", 20000, true));
+        List<Inmueble> lista = new ArrayList<Inmueble>();
+        lista.add(new Inmueble(1, "Sucre 2250", 4, "Depto", "Residencial", 10000, true));
+        lista.add(new Inmueble(2, "Poblet 548", 10, "Depto", "Comercial", 50000, true));
+        lista.add(new Inmueble(3, "Bolivar 815", 1, "Depto", "Comercial", 5000, true));
+        lista.add(new Inmueble(4, "Colon 3213", 3, "Depto", "Residencial", 15000, true));
+        lista.add(new Inmueble(5, "Lince 22 19", 6, "Depto", "Comercial", 30000, true));
+        lista.add(new Inmueble(6, "Italia 11 Sur", 2, "Depto", "Comercial", 10000, true));
+        lista.add(new Inmueble(7, "Ruta 3 Km 11", 8, "Depto", "Residencial", 80000, true));
+        lista.add(new Inmueble(8, "Ruta 20 km 4", 3, "Depto", "Residencial", 15000, true));
+        lista.add(new Inmueble(9, "Av Illia 185", 4, "Depto", "Comercial", 20000, true));
         setPropiedades(lista);
     }
 

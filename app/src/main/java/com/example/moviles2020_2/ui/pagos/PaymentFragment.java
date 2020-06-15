@@ -2,7 +2,6 @@ package com.example.moviles2020_2.ui.pagos;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
@@ -18,9 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moviles2020_2.R;
-import com.example.moviles2020_2.model.Propiedad;
-import com.example.moviles2020_2.ui.inquilinos.AdapterInquilino;
-import com.example.moviles2020_2.ui.inquilinos.InquilinoViewModel;
+import com.example.moviles2020_2.model.Inmueble;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +25,7 @@ import java.util.List;
 public class PaymentFragment extends Fragment {
 
     private PaymentViewModel mViewModel;
-    List<Propiedad> listaMutable;
+    List<Inmueble> listaMutable;
     RecyclerView contenedor;
 
     public static PaymentFragment newInstance() {
@@ -49,9 +46,9 @@ public class PaymentFragment extends Fragment {
             mViewModel.obtenerPropiedades();
 
             listaMutable = new ArrayList<>();
-            final Observer<List<Propiedad>> listaObservable = new Observer<List<Propiedad>>() {
+            final Observer<List<Inmueble>> listaObservable = new Observer<List<Inmueble>>() {
                 @Override
-                public void onChanged(List<Propiedad> propiedads) {
+                public void onChanged(List<Inmueble> propiedads) {
                     contenedor.setAdapter(new AdapterPagosPropiedades(propiedads));
                 }
             };

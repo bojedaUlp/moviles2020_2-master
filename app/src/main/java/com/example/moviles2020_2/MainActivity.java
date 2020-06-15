@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    private TextView sessionNombre;
+    private TextView token;
 
 
     @Override
@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        token=findViewById(R.id.tvSessionNombre);
+        token.setText("Anduvo");
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -45,24 +46,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        Bundle bundle = getIntent().getExtras();
-        if(bundle.getString("mail")!= null)
-        {
-            sessionNombre = findViewById(R.id.tvSessionNombre);
-            sessionNombre.setText(bundle.getString("nombre"));
-            sessionNombre = findViewById(R.id.tvSessionMail);
-            sessionNombre.setText(bundle.getString("mail"));
-
-        }
         return true;
     }
 

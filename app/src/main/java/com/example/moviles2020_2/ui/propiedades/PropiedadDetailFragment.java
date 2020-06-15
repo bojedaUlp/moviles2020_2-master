@@ -4,14 +4,12 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.icu.lang.UProperty;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,11 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.moviles2020_2.R;
-import com.example.moviles2020_2.model.Propiedad;
-import com.example.moviles2020_2.model.Usuario;
+import com.example.moviles2020_2.model.Inmueble;
 
 public class PropiedadDetailFragment extends Fragment {
 
@@ -57,9 +53,9 @@ public class PropiedadDetailFragment extends Fragment {
             btnToggleDisponible = view.findViewById(R.id.btnToggleDisponible);
 
 
-            final Observer<Propiedad> propiedadObserver = new Observer<Propiedad>() {
+            final Observer<Inmueble> propiedadObserver = new Observer<Inmueble>() {
                 @Override
-                public void onChanged(Propiedad propiedad) {
+                public void onChanged(Inmueble propiedad) {
                     try {
 
                        tvDireccion.setText(propiedad.getDireccion()+"");

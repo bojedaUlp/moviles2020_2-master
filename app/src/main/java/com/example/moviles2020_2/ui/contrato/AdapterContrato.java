@@ -12,15 +12,15 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moviles2020_2.R;
-import com.example.moviles2020_2.model.Propiedad;
+import com.example.moviles2020_2.model.Inmueble;
 
 import java.util.List;
 
 public class AdapterContrato extends RecyclerView.Adapter<AdapterContrato.ViewHolder> {
 
-    List<Propiedad> listaPropiedad;
+    List<Inmueble> listaPropiedad;
 
-    public AdapterContrato(List<Propiedad> listaPropiedad) {
+    public AdapterContrato(List<Inmueble> listaPropiedad) {
         this.listaPropiedad = listaPropiedad;
     }
 
@@ -45,10 +45,10 @@ public class AdapterContrato extends RecyclerView.Adapter<AdapterContrato.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvDireccion, tvAmbientes, tvTipo, tvUso, tvPrecio, tvDisponible;
         Button btnBuscaPropiedad;
-        List<Propiedad> lista;
+        List<Inmueble> lista;
 
 
-        public ViewHolder(@NonNull View itemView, List<Propiedad> lista) {
+        public ViewHolder(@NonNull View itemView, List<Inmueble> lista) {
             super(itemView);
             tvDireccion = itemView.findViewById(R.id.tvDireccion);
             tvAmbientes = itemView.findViewById(R.id.tvAmbientes);
@@ -61,7 +61,7 @@ public class AdapterContrato extends RecyclerView.Adapter<AdapterContrato.ViewHo
             this.lista = lista;
         }
 
-        public void cargaPropiedad(Propiedad p){
+        public void cargaPropiedad(Inmueble p){
             tvDireccion.setText(p.getDireccion());
             tvAmbientes.setText(p.getAmbientes()+"");
             //tvTipo.setText(p.getTipo());
@@ -74,7 +74,7 @@ public class AdapterContrato extends RecyclerView.Adapter<AdapterContrato.ViewHo
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            Propiedad propiedad = listaPropiedad.get(position);
+            Inmueble propiedad = listaPropiedad.get(position);
 
             //Toast.makeText(btnBuscaPropiedad.getContext(), propiedad.getDireccion(), Toast.LENGTH_SHORT).show();
 

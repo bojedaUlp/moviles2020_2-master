@@ -1,24 +1,45 @@
 package com.example.moviles2020_2;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.moviles2020_2.model.Usuario;
 import com.example.moviles2020_2.model.GeneralData;
+import com.example.moviles2020_2.model.UsuarioLogin;
+import com.example.moviles2020_2.request.ApiClient;
 
-public class LoginViewModel extends ViewModel {
-    MutableLiveData<String> error;
-    MutableLiveData<Usuario> usuario;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class LoginViewModel extends AndroidViewModel {
+ private Context context;
+ private MutableLiveData<String> error;
+    private MutableLiveData<String> exitoso;
+    private MutableLiveData<String> token;
 
 
-    public LoginViewModel(){
-        error = new MutableLiveData<>();
-        usuario = new MutableLiveData<>();
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
+        context=application.getApplicationContext();
+    }
 
+
+    public LiveData<String> getExitoso(){
+        if(exitoso==null){
+            exitoso = new MutableLiveData<>();
+        }
+        return exitoso;
     }
 
     public LiveData<String> getError() {
@@ -28,23 +49,45 @@ public class LoginViewModel extends ViewModel {
         return error;
     }
 
-    public LiveData<Usuario> getUsuario() {
-        if (usuario == null){
-            usuario = new MutableLiveData<Usuario>();
+    public LiveData<String> getToken(){
+        if(token== null){
+            token= new MutableLiveData<String>();
         }
-        return usuario;
+            return token;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public void validar(String mail){
+    public void ingresar(String email, String pass){
+        UsuarioLogin usuario= new UsuarioLogin(email,pass);
+        Call<String> miUsuario= ApiClient.getMyApiClient().login(usuario);
+        miUsuario.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()) {
+                    if(response.body().length()>0) {
+                        String token = response.body();
 
-        if (mail.equals("")){
+                        SharedPreferences sp = context.getSharedPreferences("token",0);
+                        SharedPreferences.Editor editor = sp.edit();
 
-            error.setValue("Verifique usuario y contraseña");
-        }else{
-            Usuario u = new Usuario(1, "29887502", "Lucero", "Pedro", "2664565685", "pedro@mail.com", "123");
-            usuario.setValue(u);
-        }
+                        editor.putString("token",token);
 
+                        editor.commit();
+
+                        exitoso.postValue(token);
+                    }
+                }else{
+                    error.postValue("No se encontro el usuario, verifique sus datos");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                error.postValue("Ha ocurrido el siguiente error: " + t.getMessage());
+                Log.d("salida Error",t.getMessage());
+                Log.d("salida Error",call.request().body().toString());
+                t.printStackTrace();
+            }
+        });
     }
+
 }

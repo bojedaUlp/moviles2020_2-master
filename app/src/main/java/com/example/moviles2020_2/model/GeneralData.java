@@ -10,10 +10,8 @@ import java.util.List;
 public class GeneralData {
 
 
-
-
     private static List<Usuario> lista;
-    private List<Propiedad> propiedads;
+    private List<Inmueble> propiedads;
 
     public GeneralData() {
 

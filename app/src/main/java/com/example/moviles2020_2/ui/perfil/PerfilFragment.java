@@ -19,6 +19,7 @@ import android.widget.EditText;
 
 import com.example.moviles2020_2.LoginViewModel;
 import com.example.moviles2020_2.R;
+import com.example.moviles2020_2.model.Propietario;
 import com.example.moviles2020_2.model.Usuario;
 
 import java.util.IllegalFormatCodePointException;
@@ -27,10 +28,10 @@ import java.util.concurrent.ExecutionException;
 public class PerfilFragment extends Fragment {
 
     private PerfilViewModel mViewModel;
-    EditText etdni, etapellido, etnombre, etTelefono, etMail, etPass;
+    EditText etdni, etapellido, etnombre, etTelefono, etMail, etPass,etDir;
     Button btnToggleEditar;
     private int estado = 0;
-
+    private Propietario p =null;
 
     public static PerfilFragment newInstance() {
         return new PerfilFragment();
@@ -46,52 +47,14 @@ public class PerfilFragment extends Fragment {
         etTelefono = view.findViewById(R.id.etPFTelefono);
         etMail = view.findViewById(R.id.etPFMail);
         etPass = view.findViewById(R.id.etPFPass);
+        etDir=view.findViewById(R.id.etIFDDireccion);
         btnToggleEditar = view.findViewById(R.id.btnToggleEditar);
 
-            mViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PerfilViewModel.class);
+        mViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PerfilViewModel.class);
 
-            mViewModel.obtenerPerfil("Aca voy a pasar el parametro de la session");
 
-        final Observer<Usuario> usuarioObserver = new Observer<Usuario>() {
-            @Override
-            public void onChanged(Usuario usuario) {
 
-                etdni.setText(usuario.getDni() + "");
-                etapellido.setText(usuario.getApellido() + "");
-                etnombre.setText(usuario.getNombre() + "");
-                etTelefono.setText(usuario.getTelefono() + "");
-                etMail.setText(usuario.getMail() + "");
-                etPass.setText(usuario.getPass() + "");
-            }
-        };
-        mViewModel.getUsuario().observe(getViewLifecycleOwner(), usuarioObserver);
-
-        btnToggleEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (estado==1){
-                    estadoDos();
-                    Usuario u = new Usuario(
-                            1,
-                            etdni.getText().toString(),
-                            etapellido.getText().toString(),
-                            etnombre.getText().toString(),
-                            etTelefono.getText().toString(),
-                            etMail.getText().toString(),
-                            etPass.getText().toString()
-                    );
-                    mViewModel.setUsuario(u);
-
-                }else{
-                    estadoUno();
-                }
-            }
-        });
-
-        estadoUno();
-        return view;
-    }
-
+        public void fijarDato(){}
 
     public void estadoUno() {
         etdni.setEnabled(false);
@@ -101,6 +64,7 @@ public class PerfilFragment extends Fragment {
         etMail.setEnabled(false);
         etPass.setEnabled(false);
         etapellido.setEnabled(false);
+        etDir.setEnabled(false);
         btnToggleEditar.setText("Editar");
         estado = 1;
     }
@@ -113,8 +77,9 @@ public class PerfilFragment extends Fragment {
         etMail.setEnabled(true);
         etPass.setEnabled(true);
         etapellido.setEnabled(true);
+        etDir.setEnabled(true);
         btnToggleEditar.setText("Actualizar");
         estado = 2;
-
     }
+}
 }

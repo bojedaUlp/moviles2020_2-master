@@ -2,7 +2,6 @@ package com.example.moviles2020_2.ui.pagos;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
@@ -19,7 +18,6 @@ import android.view.ViewGroup;
 
 import com.example.moviles2020_2.R;
 import com.example.moviles2020_2.model.Pago;
-import com.example.moviles2020_2.model.Propiedad;
 
 import java.util.ArrayList;
 import java.util.List;

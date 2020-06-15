@@ -1,14 +1,12 @@
 package com.example.moviles2020_2.model;
 
-import java.util.Date;
-
 public class Contrato {
     private int id;
     private double precio;
     private String inicio;
     private String fin;
     private Inquilino inquilino;
-    private Propiedad propiedad;
+    private Inmueble propiedad;
 
     public Contrato() {
     }
@@ -60,11 +58,11 @@ public class Contrato {
         this.inquilino = inquilino;
     }
 
-    public Propiedad getPropiedad() {
+    public Inmueble getPropiedad() {
         return propiedad;
     }
 
-    public void setPropiedad(Propiedad propiedad) {
+    public void setPropiedad(Inmueble propiedad) {
         this.propiedad = propiedad;
     }
 }
